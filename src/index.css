@@ -4,7 +4,7 @@ body {
 }
 
 ol, ul {
-    paddin-left: 30px;
+    padding-left: 30px;
 }
 
 .board-row:after {
@@ -48,5 +48,3 @@ ol, ul {
 .game-info {
     margin-left: 20px;
 }
-
-
