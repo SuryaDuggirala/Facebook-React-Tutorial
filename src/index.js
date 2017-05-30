@@ -68,6 +68,9 @@ class Board extends React.Component {
     // [A, B, C, D] --- OBJECTS IN MEMORY
     // [|, |, |, |] --- NEW ARRAY IN HANDLECLICK()
     const newSquares = this.state.squares.slice();
+    if (findWinner(this.state.squares || squares[i])) {
+      return;
+    }
     // WHY DOESN'T THIS WORK? 
     //
     // if (this.xIsNext) {
@@ -85,8 +88,13 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-
+    const winner = findWinner(this.state.squares);
+    let status; 
+    if (winner) {
+      status = 'Winner: ' + winner
+    } else {
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
     return (
       <div>
         <div className="status">{status}</div>
@@ -126,6 +134,30 @@ class Game extends React.Component {
   }
 }
 
+function findWinner(squares) {
+    // IF ANY OF THESE ARE THE SAME, THEN GAME IS OVER
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    // SIMILAR TO JAVA
+    for (let i = 0; i < lines.length; i++) {
+      // GET A LINE FROM THE LINES LIST TO CROSS CHECK WITH SQUARES.
+      const [first, second, third] = lines[i];
+      if (squares[a] && squares[b] === squares[b] && squares[a]
+      === squares[c]) {
+        return squares[a];
+      }
+    }
+    // IF NO WINNER
+    return null;
+}
 // ========================================
 
 // ENCAPSULATION!!! ALL WE CALL IN THE FINAL RENDER METHOD IS THE <GAME /> XML TAG. 
