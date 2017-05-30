@@ -68,7 +68,7 @@ class Board extends React.Component {
     // [A, B, C, D] --- OBJECTS IN MEMORY
     // [|, |, |, |] --- NEW ARRAY IN HANDLECLICK()
     const newSquares = this.state.squares.slice();
-    if (findWinner(this.state.squares || squares[i])) {
+    if (findWinner(this.state.squares || this.state.squares[i])) {
       return;
     }
     // WHY DOESN'T THIS WORK? 
@@ -149,7 +149,7 @@ function findWinner(squares) {
     // SIMILAR TO JAVA
     for (let i = 0; i < lines.length; i++) {
       // GET A LINE FROM THE LINES LIST TO CROSS CHECK WITH SQUARES.
-      const [first, second, third] = lines[i];
+      const [a, b, c] = lines[i];
       if (squares[a] && squares[b] === squares[b] && squares[a]
       === squares[c]) {
         return squares[a];
